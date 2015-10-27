@@ -7,9 +7,5 @@
   :serial t
   :depends-on (#:alexandria)
   :components ((:file "package")
-	       (:file "riff")))
-
-
-
-
-
+	       (:file "riff")
+               (:file "write")))

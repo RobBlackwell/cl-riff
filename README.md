@@ -27,10 +27,8 @@ Example
 	> (riff:riff-file-type (first *))
 	"WAVE"
 
-Limitations
------------
-
-Currently only supports reading files, not writing.
+    > (riff:write-riff-file (riff:read-riff-file "c:/windows/media/ding.wav")
+                            "c:/windows/media/ding-copy.wav")
 
 References
 ----------
@@ -42,5 +40,5 @@ References
 [Resource Interchange File Format (RIFF), MSDN](http://msdn.microsoft.com/en-us/library/windows/desktop/ee415713(v=vs.85).aspx)
 
 
-Rob Blackwell    
+Rob Blackwell
 February 2014
