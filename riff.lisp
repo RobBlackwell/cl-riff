@@ -32,11 +32,11 @@ an ASCII string. Returns NIL if end of file."
 
 (defun default-chunk-data-reader (stream chunk-id chunk-data-size)
   "Reads chunk-data as an array of chunk-data-size bytes."
-  (let ((chunk-data (make-array chunk-data-size 
+  (let ((chunk-data (make-array chunk-data-size
 			       :element-type (stream-element-type stream))))
     (read-sequence chunk-data stream)
     chunk-data))
-  
+
 (defun read-riff-chunk (stream &key (chunk-data-reader #'default-chunk-data-reader))
   "Reads a riff file chunk from stream and returns it as a plist or
 NIL if end of file."
@@ -45,16 +45,16 @@ NIL if end of file."
       (let
 	  ((chunk-data-size (read-u4 stream)))
 	(if (or (string= chunk-id "RIFF") (string= chunk-id "LIST"))
-	    (list :chunk-id chunk-id 
-		  :chunk-data-size chunk-data-size  
+	    (list :chunk-id chunk-id
+		  :chunk-data-size chunk-data-size
 		  :file-type (read-fourcc stream))
 	    (let
 		((chunk-data (funcall chunk-data-reader stream chunk-id chunk-data-size)))
 	      (when (oddp chunk-data-size)
 		;; Discard pad character.
 		(read-byte stream))
-	      (list :chunk-id chunk-id 
-		    :chunk-data-size chunk-data-size 
+	      (list :chunk-id chunk-id
+		    :chunk-data-size chunk-data-size
 		    :chunk-data chunk-data)))))))
 
 (defun read-riff-chunks (stream &key (chunk-data-reader #'default-chunk-data-reader))
@@ -94,6 +94,12 @@ NIL meaning not found."
 
 (defmethod riff-chunk-data ((chunk cons))
   (getf chunk :chunk-data))
+
+(defmethod riff-chunk-data-start ((chunk cons))
+  (getf chunk :chunk-data-start 0))
+
+(defmethod riff-chunk-data-end (chunk)
+  (+ (riff-chunk-data-start chunk) (riff-chunk-data-size chunk)))
 
 (defmethod riff-file-type ((chunk cons))
   (getf chunk :file-type))

@@ -1,7 +1,7 @@
 ;;;; package.lisp
 
 (defpackage #:riff
-  (:use #:cl 
+  (:use #:cl
 	#:alexandria)
   (:export #:read-riff-chunk
 	   #:read-riff-chunks
@@ -13,5 +13,12 @@
 	   #:riff-chunk-id
 	   #:riff-chunk-data
 	   #:riff-chunk-data-size
-	   #:riff-file-type))
-
+           #:riff-chunk-data-start
+           #:riff-chunk-data-end
+	   #:riff-file-type)
+  (:export #:write-riff-chunk
+           #:write-riff-chunks
+           #:write-riff-file
+           #:write-u2
+           #:write-u4
+           #:default-chunk-data-writer))
