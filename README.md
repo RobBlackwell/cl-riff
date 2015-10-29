@@ -40,5 +40,7 @@ References
 [Resource Interchange File Format (RIFF), MSDN](http://msdn.microsoft.com/en-us/library/windows/desktop/ee415713(v=vs.85).aspx)
 
 
-Rob Blackwell
-February 2014
+Contributors
+------------
+
+Write functionality by Patrick Stein.
