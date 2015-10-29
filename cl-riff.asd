@@ -1,7 +1,7 @@
 ;;;; cl-riff.asd
 
 (asdf:defsystem #:cl-riff
-  :version "0.0.1"
+  :version "0.0.2"
   :author "Rob Blackwell"
   :description "Reads Resource Interchange File Format (RIFF) files."
   :serial t
