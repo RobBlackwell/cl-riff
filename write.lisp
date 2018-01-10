@@ -6,7 +6,7 @@
   "Writes a four character tag (FOURCC) to stream."
   (assert (= (length fourcc) 4))
   (loop for ch across fourcc
-     do (write-byte (char-code ch) stream))
+        do (write-byte (char-code ch) stream))
   stream)
 
 (defun write-u4 (u4 stream)
@@ -23,7 +23,7 @@
   (write-byte (ldb (byte 8 8) u2) stream)
   stream)
 
-(defun default-chunk-data-writer (chunk-data stream
+(defun default-chunk-data-writer (chunk-id chunk-data stream
                                   &key (start 0) (end (length chunk-data)))
   "Writes chunk-data as an array of bytes."
   (write-sequence chunk-data stream :start start :end end)
@@ -38,17 +38,13 @@
 
 (defun write-riff-chunk (chunk-id chunk-data stream
                          &key (chunk-data-writer #'default-chunk-data-writer)
-                           start end)
+                           (start 0) (end (length chunk-data)))
   "Writes a riff file chunk to stream."
-  (let* ((start (or start 0))
-         (end (or end (length chunk-data)))
-         (len (- end start)))
-    (assert (<= 0 start end (length chunk-data)))
-
+  (let* ((len (- end start)))
     (write-fourcc chunk-id stream)
     (write-u4 len stream)
 
-    (funcall chunk-data-writer chunk-data stream :start start :end end)
+    (funcall chunk-data-writer chunk-id chunk-data stream :start start :end end)
     ;; Add pad character if needed
     (when (oddp len)
       (write-byte 0 stream)))
