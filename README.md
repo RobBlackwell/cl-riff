@@ -39,8 +39,14 @@ References
 
 [Resource Interchange File Format (RIFF), MSDN](http://msdn.microsoft.com/en-us/library/windows/desktop/ee415713(v=vs.85).aspx)
 
+[Resource Interchange File Format (RIFF)](http://FileFormats.ArchiveTeam.org/wiki/RIFF#Specifications)
+
+[Inside the RIFF Specification](https://www.DrDobbs.com/database/inside-the-riff-specification/184409308)
+
+[RIFF File Structure](https://JohnLoomis.org/cpe102/asgn/asgn1/riff.html)
 
 Contributors
 ------------
 
 Write functionality by Patrick Stein.
+RIFX and XFIR detection and reading by Devon Sean McCullough.
